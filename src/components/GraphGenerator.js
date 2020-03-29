@@ -1,18 +1,18 @@
 import React, { Component } from "react";
 import "./GraphGenerator.css";
 
+let positions = {};
+
 class GraphGenerator extends Component {
   constructor() {
     super();
     this.state = {
       graph: {},
       nodeCount: 0,
-      isDirected: false
+      isDirected: false,
+      nodePositions: {}
+      // positions: []
     };
-    // this.handleChange = this.handleChange.bind(this);
-    // this.generateGraph = this.generateGraph.bind(this);
-    // this.displayNodes = this.displayNodes.bind(this);
-    // this.getNodePositions = this.getNodePositions.bind(this);
   }
 
   generateGraph = () => {
@@ -53,19 +53,31 @@ class GraphGenerator extends Component {
     );
   };
 
-  getNodePositions = node => {
-    console.log("HELLO");
-    console.log(node);
-    // console.log(node.props.id);
-    // console.log(document.getElementById(node.props.id));
-
-    // let offset = document.getElementById(node.props.id).getBoundingClientRect();
-    // let top = offset.top;
-    // console.log(top);
+  displayEdges = () => {
+    const { edges } = this.state.graph;
+    if (edges !== undefined) {
+    }
   };
 
-  componentDidMount() {
-    this.getNodePositions();
+  getNodePositions = node => {
+    let offset = document.getElementById(node).getBoundingClientRect();
+    Object.assign(positions, { [node]: [offset.x, offset.y] });
+  };
+
+  componentDidUpdate(prevProps) {
+    const { nodes } = this.state.graph;
+    console.log(prevProps);
+
+    if (nodes !== undefined) {
+      positions = {};
+      nodes.map(node => {
+        return this.getNodePositions(node);
+      });
+      if (positions !== {}) {
+        this.setState({ nodePositions: positions });
+        console.log(this.state.nodePositions);
+      }
+    }
   }
 
   render() {
@@ -75,13 +87,6 @@ class GraphGenerator extends Component {
           return this.displayNodes(node);
         })
       : null;
-    if (nodes) {
-      console.log("starting to get position");
-      nodeList.forEach(node => {
-        console.log(node);
-        this.getNodePositions(node);
-      });
-    }
     return (
       <div>
         <input
@@ -91,6 +96,9 @@ class GraphGenerator extends Component {
         ></input>
         <button onClick={this.generateGraph}>Generate Graph</button>
         <div className="nodes">{nodeList}</div>
+        <svg width="500" height="500">
+          <line x1="50" y1="50" x2="350" y2="350" stroke="black" />
+        </svg>
       </div>
     );
   }
