@@ -1,0 +1,22 @@
+@import url("https://fonts.googleapis.com/css?family=Chewy&display=swap");
+
+.nodes {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  column-gap: 20px;
+  row-gap: 50px;
+  justify-items: center;
+  /* border: solid; */
+}
+
+.node {
+  border-radius: 50px;
+  width: 25px;
+  color: white;
+  /* margin: 0; */
+  padding: 15px 20px 15px 20px;
+  display: flex;
+  justify-content: center;
+  font-family: "Chewy", cursive;
+  font-size: 30px;
+}
