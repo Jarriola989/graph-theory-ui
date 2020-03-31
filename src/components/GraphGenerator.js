@@ -1,7 +1,8 @@
 import React, { Component } from "react";
 import "./GraphGenerator.css";
 
-let positions = {};
+let nodePositions = {};
+let graphEdges = [];
 
 class GraphGenerator extends Component {
   constructor() {
@@ -10,8 +11,7 @@ class GraphGenerator extends Component {
       graph: {},
       nodeCount: 0,
       isDirected: false,
-      nodePositions: {}
-      // positions: []
+      edges: []
     };
   }
 
@@ -40,7 +40,6 @@ class GraphGenerator extends Component {
   displayNodes = node => {
     const colors = ["#744FC6", "#4F86C6", "#4FB0C6", "#379392"];
     const randomColor = colors[Math.floor(Math.random() * colors.length)];
-
     return (
       <div
         className="node"
@@ -53,30 +52,55 @@ class GraphGenerator extends Component {
     );
   };
 
-  displayEdges = () => {
-    const { edges } = this.state.graph;
-    if (edges !== undefined) {
-    }
+  setEdges = (start, end) => {
+    graphEdges.push(
+      <svg
+        className="edge"
+        width="500"
+        height="500"
+        key={start + end}
+        id={start + end}
+      >
+        <line
+          // className="edge"
+          x1={nodePositions[start][0]}
+          y1={nodePositions[start][1]}
+          x2={nodePositions[end][0]}
+          y2={nodePositions[end][1]}
+          stroke="black"
+        />
+      </svg>
+    );
   };
 
   getNodePositions = node => {
-    let offset = document.getElementById(node).getBoundingClientRect();
-    Object.assign(positions, { [node]: [offset.x, offset.y] });
+    let offsetLeft = document.getElementById(node).offsetLeft;
+    let offsetTop = document.getElementById(node).offsetTop;
+    let nodeWidth = document.getElementById(node).offsetWidth;
+    let nodeHeight = document.getElementById(node).offsetHeight;
+    // console.log(offset);
+    Object.assign(nodePositions, {
+      [node]: [offsetLeft - nodeWidth / 2, offsetTop - nodeHeight / 2]
+    });
   };
 
-  componentDidUpdate(prevProps) {
-    const { nodes } = this.state.graph;
-    console.log(prevProps);
+  componentDidUpdate(prevProps, prevState) {
+    const { nodes, edges } = this.state.graph;
 
     if (nodes !== undefined) {
-      positions = {};
+      nodePositions = {};
       nodes.map(node => {
         return this.getNodePositions(node);
       });
-      if (positions !== {}) {
-        this.setState({ nodePositions: positions });
-        console.log(this.state.nodePositions);
-      }
+    }
+    if (edges !== undefined) {
+      graphEdges = [];
+      edges.map(([start, end]) => {
+        return this.setEdges(start, end);
+      });
+    }
+    if (JSON.stringify(prevState.edges) !== JSON.stringify(graphEdges)) {
+      this.setState({ edges: graphEdges });
     }
   }
 
@@ -88,34 +112,21 @@ class GraphGenerator extends Component {
         })
       : null;
     return (
-      <div>
+      <div className="graph-generator">
         <input
+          className="node-input"
           type="number"
           id="nodeCount"
           onChange={this.handleChange}
         ></input>
         <button onClick={this.generateGraph}>Generate Graph</button>
-        <div className="nodes">{nodeList}</div>
-        <svg width="500" height="500">
-          <line x1="50" y1="50" x2="350" y2="350" stroke="black" />
-        </svg>
+        <div className="graph-display">
+          {nodeList}
+          {this.state.edges}
+        </div>
       </div>
     );
   }
 }
 
 export default GraphGenerator;
-
-// function getNodePositions(node) {
-//   console.log(node);
-//   console.log(node.props.id);
-//   console.log(document.getElementById(node.props.id));
-//   // document.onload = function() {
-//   //   let a = document.getElementById(node.props.id);
-//   //   console.log("This is inside onload function");
-//   //   console.log(a);
-//   // };
-//   // let offset = document.getElementById(node.props.id).getBoundingClientRect();
-//   // let top = offset.top;
-//   // console.log(top);
-// }
