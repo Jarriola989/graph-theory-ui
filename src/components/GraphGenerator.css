@@ -1,12 +1,28 @@
 @import url("https://fonts.googleapis.com/css?family=Chewy&display=swap");
 
-.nodes {
+.graph-generator {
+  position: relative;
+  border: solid;
+  border-radius: 20px;
+  margin: 100px;
+  background-color: #1e5150;
+  border-color: #1e5150;
+  z-index: 3;
+}
+
+.graph-display {
+  /* border: solid; */
+  margin: 50px;
+  background-color: white;
+  min-height: 700px;
+  overflow: scroll;
+  z-index: 3;
   display: grid;
   grid-template-columns: repeat(5, 1fr);
-  column-gap: 20px;
-  row-gap: 50px;
-  justify-items: center;
-  /* border: solid; */
+  column-gap: 5%;
+  /* row-gap: 5%; */
+
+  /* padding: 0px; */
 }
 
 .node {
@@ -19,4 +35,18 @@
   justify-content: center;
   font-family: "Chewy", cursive;
   font-size: 30px;
+  z-index: 2;
+  margin: auto;
+}
+
+.edge {
+  position: absolute;
+  z-index: 1;
+  /* border: solid; */
+  border-color: red;
+  background-color: transparent;
+  padding: 0;
+  width: 100%;
+  height: 90%;
+  /* margin: 0; */
 }
