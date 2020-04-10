@@ -1,0 +1,62 @@
+@import url("https://fonts.googleapis.com/css?family=Tomorrow:400,500&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Sen:wght@400;700&display=swap");
+.navbar {
+  /* padding: 10px; */
+  /* border: solid; */
+  background-color: rgb(210, 210, 210);
+  -webkit-box-shadow: inset 0px -143px 77px -26px rgba(255, 255, 255, 1);
+  -moz-box-shadow: inset 0px -143px 77px -26px rgba(255, 255, 255, 1);
+  box-shadow: inset 0px -143px 77px -26px rgba(255, 255, 255, 1);
+}
+.header {
+  display: flex;
+  justify-content: space-between;
+  /* padding: 10px; */
+  padding-left: 10px;
+  /* border: solid; */
+}
+
+h1 {
+  font-family: "Tomorrow", sans-serif;
+  padding: 10px;
+}
+
+.header p {
+  align-self: center;
+  margin-right: 50px;
+  font-size: 20px;
+  font-family: "Sen", sans-serif;
+}
+
+.algorithms {
+  width: 100%;
+  /* background-color: #7a57c6; */
+  /* border: solid; */
+  display: flex;
+  justify-content: center;
+}
+.algorithms button {
+  font-size: 18px;
+  font-family: "Sen", sans-serif;
+  font-weight: 700;
+  padding: 20px;
+  cursor: pointer;
+  /* background-color: #7a57c6;
+  background-image: linear-gradient(#9275d0, #7a57c6); */
+  color: #4f86c6;
+  border: none;
+  background-color: transparent;
+}
+.algorithms button:hover {
+  color: #33567f;
+}
+.algorithms button:active {
+  border-bottom: solid;
+  color: #4fb0c6;
+}
+
+.algorithms button:focus {
+  outline: none;
+  /* border-bottom: solid; */
+  color: #4fb0c6;
+}

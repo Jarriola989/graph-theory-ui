@@ -5,16 +5,88 @@
   border: solid;
   border-radius: 20px;
   margin: 100px;
+  margin-bottom: 50px;
   background-color: #1e5150;
   border-color: #1e5150;
   z-index: 3;
+  padding: 50px;
+  display: grid;
+  height: 800px;
+  grid-template-rows: 10% 90%;
+}
+
+.graph-setup-menu {
+  width: 100%;
+  position: absolute;
+  /* border: solid; */
+  display: flex;
+  justify-content: space-around;
+  /* align-items: center; */
+  padding: 20px;
+  margin: 0px;
+}
+
+.node-slider {
+  height: 15px;
+  border-radius: 5px;
+  background-color: #d0d0d0;
+  width: 50%;
+  opacity: 0.9;
+  -webkit-appearance: none;
+  -webkit-transition: 0.2s;
+  transition: opacity 0.2s;
+  margin: 15px;
+  margin-left: 0px;
+  /* float: left; */
+}
+
+.node-slider:hover {
+  opacity: 1;
+}
+
+.node-slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  background-color: #4fb0c6;
+  width: 25px;
+  height: 25px;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+.node-slider::-moz-range-thumb {
+  width: 25px;
+  height: 25px;
+  border-radius: 50%;
+  background: #4fb0c6;
+  cursor: pointer;
+}
+
+.node-count {
+  color: white;
+  font-size: 16px;
+  font-family: "Chewy", cursive;
+}
+
+.generate-btn {
+  font-size: 20px;
+  margin: 0; /* to adjust if we change thickness of graph generator */
+  padding: 10px;
+  color: white;
+  background-color: #4fb0c6;
+  border: none;
+  border-radius: 10px;
+  align-self: top;
+  /* float: right; */
 }
 
 .graph-display {
+  grid-row: 2 / 3;
   /* border: solid; */
-  margin: 50px;
+  position: relative;
+  /* margin: 50px;
+  margin-top: 70px; */
   background-color: white;
-  min-height: 700px;
   overflow: scroll;
   z-index: 3;
   display: grid;
@@ -43,10 +115,10 @@
   position: absolute;
   z-index: 1;
   /* border: solid; */
-  border-color: red;
+  /* border-color: red; */
   background-color: transparent;
   padding: 0;
   width: 100%;
-  height: 90%;
-  /* margin: 0; */
+  height: 100%;
+  margin: 5%;
 }

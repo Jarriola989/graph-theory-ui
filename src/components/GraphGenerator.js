@@ -113,13 +113,21 @@ class GraphGenerator extends Component {
       : null;
     return (
       <div className="graph-generator">
-        <input
-          className="node-input"
-          type="number"
-          id="nodeCount"
-          onChange={this.handleChange}
-        ></input>
-        <button onClick={this.generateGraph}>Generate Graph</button>
+        <div className="graph-setup-menu">
+          <input
+            className="node-slider"
+            id="nodeCount"
+            type="range"
+            min="1"
+            max="20"
+            defaultValue="1"
+            onChange={this.handleChange}
+          />
+          <p className="node-count">{this.state.nodeCount}</p>
+          <button onClick={this.generateGraph} className="generate-btn">
+            Generate Graph
+          </button>
+        </div>
         <div className="graph-display">
           {nodeList}
           {this.state.edges}
